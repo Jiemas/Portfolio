@@ -22,6 +22,6 @@ jobs:
     - name: Commit wwwroot to GitHub Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
-        ssh-key: ${{ secrets.DEPLOY_KEY }}
+        SSH: ${{ secrets.DEPLOY_KEY }}
         BRANCH: gh-pages
         FOLDER: release/wwwroot
