@@ -1,4 +1,4 @@
-﻿@page "/{order?}"
+﻿@page "/"
 @inject NavigationManager NavManager
 
 @inject DatabaseService DbService
@@ -37,7 +37,9 @@ else
 
 @code {
     [Parameter]
-    public string? order { get; set; } = "";
+    [SupplyParameterFromQuery(Name = "order")]
+    public string? order { get; set; }
+
     private List<string> headers = ["About Me", "Skills", "Experience", "Projects", "Contact"];
 
     public List<string>? skillKeys;
@@ -49,9 +51,9 @@ else
     protected override async Task OnInitializedAsync()
     {
         Fbdata = await DbService.GetAllDataAsync<FirebaseData>();
+        Console.WriteLine(order);
         if (order is not null && Fbdata is not null)
         {
-
             skillKeys = Fbdata.Keys[order].SkillKeys;
             experienceKeys = Fbdata.Keys[order].ExperienceKeys;
             projectKeys = Fbdata.Keys[order].ProjectKeys;
@@ -78,5 +80,6 @@ else
         }
         @* Console.WriteLine(data); *@
     }
+
 
 }
