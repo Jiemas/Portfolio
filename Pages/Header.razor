@@ -1,0 +1,26 @@
+@inject NavigationManager NavManager
+
+<MudAppBar 
+  Elevation="1" 
+  Color="Color.Primary" 
+  Gutters="false" 
+  Class="px-md-20 px-sm-10 px-xs-5"
+  Fixed="false" 
+>
+    <MudText Class="p-0" Typo="Typo.h5" Color="Color.Secondary">Jiemas Rubio</MudText>
+    <MudSpacer />
+    @foreach (string link in Links) 
+    {
+        <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="@(relativePath + "#" + link.Replace(" ", ""))">@link</MudLink>
+    }
+</MudAppBar>
+@code {
+  [Parameter]
+  public List<string> Links { get; set; } = [];
+
+  private string relativePath = null!;
+  protected override void OnInitialized()
+  {
+      relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
+  }
+}

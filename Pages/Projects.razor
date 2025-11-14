@@ -1,0 +1,45 @@
+<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-xs-5" Style="background-color: #EEF0F2;" id="Projects">
+  <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10 pb-4">Projects</MudText>
+  <SingleProject projectData="@projectDict[keys[0].Key]" key="@keys[0]" OnLinkClick="HandleLinkClick"/>
+
+  @if (keys.Count > 1)
+  {
+    <MudCollapse Expanded="@_expanded">
+      @for (int i = 0; i < keys.Count; i++)
+      {
+        int savedI = i;
+        <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]" OnLinkClick="HandleLinkClick"/> 
+      }
+    </MudCollapse>
+
+    <MudGrid Justify="Justify.Center" Class="pt-10">
+      <MudToggleIconButton
+        @bind-Toggled="_expanded"
+        Icon="@Icons.Material.Filled.KeyboardArrowDown"
+        ToggledIcon="@Icons.Material.Filled.KeyboardArrowUp"
+        Size="Size.Large"
+      >
+      </MudToggleIconButton>
+    </MudGrid>
+  }
+</MudPaper>
+
+@code {
+  [Parameter]
+  public bool _expanded { get; set; }
+
+  [Parameter]
+  public required Dictionary<string, Project> projectDict { get; set; }
+
+  [Parameter]
+  public required List<ProjectKey> keys {get; set;}
+
+  [Parameter]
+  public EventCallback<string> OnChildLinkClick { get; set;}
+
+  private async Task HandleLinkClick(string data)
+  {
+    await OnChildLinkClick.InvokeAsync(data);
+  }
+
+}

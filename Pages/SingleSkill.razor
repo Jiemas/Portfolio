@@ -1,0 +1,63 @@
+@inject NavigationManager NavManager
+
+<MudCard Style="background-color: #EEF0F2; width: 27vw;" Elevation="5" id="@skillData.Key">
+  <MudStack Class="pa-4" Spacing="0">
+    <MudStack Row="true" Justify="Justify.SpaceBetween">
+      <MudStack Spacing="0">
+        <MudText Color=Color.Primary Typo="Typo.h3">@skillData.SkillName</MudText>
+        <MudText Typo="Typo.subtitle2" Class="pl-4">@skillData.Subtitle</MudText>
+      </MudStack>
+      <MudImage Src="@skillData.ImageUrl" Style="width: 8vh; height: 8vh;" ObjectFit="ObjectFit.Contain"/>
+    </MudStack>
+    @if (skillData.SkillExperiences[0].Text != "na")
+    {
+      <MudText Typo="Typo.body1"> Experiences </MudText>
+      @foreach (HyperLink item in skillData.SkillExperiences)
+        {
+          string relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
+          <MudLink 
+            Typo="Typo.subtitle1" 
+            Href="@(relativePath + "#" + item.Link)" 
+            Color="Color.Default" 
+            Class="pl-4"
+            @onclick="@(e => (HandleLinkClick(item.Link)))"
+          >
+            @item.Text
+          </MudLink>
+        }
+    }
+
+    @if (skillData.SkillProjects[0].Text != "na")
+    {
+      <MudText Typo="Typo.body1"> Projects </MudText>
+      @foreach (HyperLink item in skillData.SkillProjects)
+        {
+          string relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
+          <MudLink
+            Typo="Typo.subtitle1" 
+            Href="@(relativePath + "#" + item.Link)" 
+            Color="Color.Default" 
+            Class="pl-4"
+            @onclick="@(e => (HandleLinkClick(item.Link)))"
+          >
+            @item.Text
+          </MudLink>
+        }
+    }
+  </MudStack>
+</MudCard>
+
+
+@code {
+  [Parameter]
+  public required Skill skillData {get; set;}
+
+  [Parameter]
+  public EventCallback<string> OnLinkClick { get; set;}
+
+  private async Task HandleLinkClick(string data)
+  {
+    await OnLinkClick.InvokeAsync(data);
+  }
+
+}

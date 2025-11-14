@@ -1,10 +1,82 @@
-﻿@page "/"
+﻿@page "/{order?}"
+@inject NavigationManager NavManager
+
+@inject DatabaseService DbService
+
+<Header Links="headers"/>
+
+<HeroImage />
+
+<MudPaper Elevation="0" Class="mt-10"/>
+
+<AboutMe />
+
+<MudPaper Elevation="0" Class="mt-10"/>
+
+@if (Fbdata is null || order is null)
+{
+    <MudPaper Elevation="0" Style="background-color: #EEF0F2; min-height: 50vh;" Class="px-md-20 px-sm-10 px-xs-5 pb-5">
+        <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
+    </MudPaper>
+    <MudPaper Elevation="0" Style="min-height: 50vh;" Class="px-md-20 px-sm-10 px-xs-5 pb-5">
+        <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Experiences</MudText>
+    </MudPaper>
+}
+else
+{
+    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandSkill"/>
+
+    <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandExperience"/>
+
+    <Projects projectDict="@Fbdata.Projects" keys="@projectKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandProject"/>
+}
+
+<Footer />
 
 
-<MudAppBar Color="Color.Primary" Bottom="true"> test </MudAppBar>
 
-<PageTitle>Home</PageTitle>
+@code {
+    [Parameter]
+    public string? order { get; set; } = "";
+    private List<string> headers = ["About Me", "Skills", "Experience", "Projects", "Contact"];
 
-<MudText Typo="Typo.h1">Hello, world!</MudText>
+    public List<string>? skillKeys;
+    public List<ExperienceKey>? experienceKeys;
+    public List<ProjectKey>? projectKeys;
 
-Welcome to your new app.
+    private FirebaseData? Fbdata;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Fbdata = await DbService.GetAllDataAsync<FirebaseData>();
+        if (order is not null && Fbdata is not null)
+        {
+
+            skillKeys = Fbdata.Keys[order].SkillKeys;
+            experienceKeys = Fbdata.Keys[order].ExperienceKeys;
+            projectKeys = Fbdata.Keys[order].ProjectKeys;
+        }
+
+    }
+
+    bool expandSkill = false;
+    bool expandExperience = false;
+    bool expandProject = false;
+
+    private void HandleLinkClick(string data){
+        @* string anchor = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[1]; *@
+        if (data[0] == 's' && !skillKeys.GetRange(0, 3).Contains(data))
+        {
+            Console.WriteLine($"{data} not found within first three skills");
+            expandSkill = true;
+        } else if (data[0] == 'e' && experienceKeys[0].Key != data && experienceKeys[1].Key != data)
+        {
+            expandExperience = true;
+        } else if (data[0] == 'p' && projectKeys[0].Key != data)
+        {
+            expandProject = true;
+        }
+        @* Console.WriteLine(data); *@
+    }
+
+}
