@@ -1,0 +1,17 @@
+@media only screen and (max-width: 745px) {
+    .header_disappear {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    .header_text_swap_disappear {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 460px) {
+    .header_text_swap_appear {
+        display: none;
+    }
+}
