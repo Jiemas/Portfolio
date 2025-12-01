@@ -1,0 +1,23 @@
+@media only screen and (min-width: 960px) {
+    .variable_width {
+        width: 25vw;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .variable_width {
+        width: 40vw;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+    .variable_width {
+        width: 75vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .variable_width {
+        width: 90vw;
+    }
+}
