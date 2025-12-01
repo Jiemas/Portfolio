@@ -1,86 +1,79 @@
 @inject NavigationManager NavManager
 
-<MudCard Style="width: 98%;" Elevation="5" id="@experienceData.Key" Class="pb-2">  
-  <MudGrid>
-    <MudItem xs="12" md="7" style="display: flex;">
-      <MudStack Row="true">
-      <MudStack Class="px-3 pt-3" Spacing="0">
-        <MudText Color=Color.Primary Typo="Typo.h3">@experienceData.ExperienceName</MudText>
-        <MudStack Row="true" Class="px-1">
-          <MudText Typo="Typo.subtitle2">
-            @(experienceData.BasicInformation.RelatedOrganization + " · " + experienceData.BasicInformation.WorkType)
-          </MudText>
-          <MudText Typo="Typo.subtitle2"> | </MudText>
-          <MudText Typo="Typo.subtitle2">
-            @(experienceData.BasicInformation.TimeWorked[0] + " - " + experienceData.BasicInformation.TimeWorked[1])
-          </MudText>
-          <MudText Typo="Typo.subtitle2"> | </MudText>
-          <MudText Typo="Typo.subtitle2">@experienceData.BasicInformation.Location</MudText>
-        </MudStack>
-        <MudStack Justify="Justify.SpaceEvenly">
-          @foreach (HyperLink sentence in experienceData.Description)
-            {
-              <MudStack Row="true">
-                <MudText Typo="Typo.body1">•</MudText>
-                <MudText Typo="Typo.body1"> @(sentence.Text)</MudText>
-              </MudStack>
-            }
-        </MudStack>
-      </MudStack>
-      <MudDivider Vertical="true" FlexItem="true" Class="my-10"/>
-      </MudStack>
-    </MudItem>
+<MudCard Style="width: 100%;" Elevation="5" id="@experienceData.Key" Class="pb-2">  
+  <div class="pa-4">
+    <MudText Color=Color.Primary Typo="Typo.h3">@experienceData.ExperienceName</MudText>
+    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2vw;">
+      <MudText Typo="Typo.subtitle2">
+        @(experienceData.BasicInformation.RelatedOrganization + " · " + experienceData.BasicInformation.WorkType)
+      </MudText>
+      @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
+      <MudText Typo="Typo.subtitle2">
+        @(experienceData.BasicInformation.TimeWorked[0] + " - " + experienceData.BasicInformation.TimeWorked[1])
+      </MudText>
+      @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
+      <MudText Typo="Typo.subtitle2">@experienceData.BasicInformation.Location</MudText>
+    
 
-    <MudItem xs="12" md="5">
-      <MudStack Spacing="0" Reverse="@key.LargeContent" Row="@(!key.LargeContent)" Class="pt-3">
-        <MudStack Row="@key.LargeContent" Justify = "Justify.SpaceEvenly">
-          @if (experienceData.SkillsUsed[0].Text != "na")
-          {
-            <MudStack Spacing="0">
-              <MudText Typo="Typo.body1"> Skills Used </MudText>
-              @foreach (int i in key.SkillsUsedKeys)
-                {
-                  HyperLink item = experienceData.SkillsUsed[i];
-                  <MudLink 
-                    Typo="Typo.subtitle1" 
-                    Href="@(relativePath + "#" + item.Link)" 
-                    Color="Color.Default" 
-                    Class="pl-4"
-                    @onclick="@(e => (HandleLinkClick(item.Link)))"
-                  >
-                    @item.Text
-                  </MudLink>
-                }
-            </MudStack>
-          }
-          @if (experienceData.RelatedWork[0].Text != "na")
-          {
-            <MudStack Spacing="0">
-              <MudText Typo="Typo.body1"> Related Work </MudText>
-              @foreach (int i in key.RelatedWorkKeys)
-                {
-                  HyperLink item = experienceData.RelatedWork[i];
-                  <MudLink 
-                    Typo="Typo.subtitle1" 
-                    Href="@(relativePath + "#" + item.Link)" 
-                    Color="Color.Default" 
-                    Class="pl-4"
-                    @onclick="@(e => (HandleLinkClick(item.Link)))"
-                  >
-                    @item.Text
-                  </MudLink>
-                }
-            </MudStack>
-          }
-        </MudStack>
+      @if (experienceData.SkillsUsed[0].Text != "na")
+        {
+          <MudStack Row="true" Spacing="2">
+            @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
+            <MudText Typo="Typo.subtitle2"> Skills Used: </MudText>
+            @foreach (int i in key.SkillsUsedKeys)
+              {
+                HyperLink item = experienceData.SkillsUsed[i];
+                <MudLink 
+                  Typo="Typo.subtitle2" 
+                  Href="@(relativePath + "#" + item.Link)" 
+                  Color="Color.Secondary" 
+                  @onclick="@(e => (HandleLinkClick(item.Link)))"
+                >
+                  @item.Text
+                </MudLink>
+              }
+          </MudStack>
+        }
+
+        @if (experienceData.RelatedWork[0].Text != "na")
+        {
+          <MudStack Row="true" Spacing="2">
+          @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
+            <MudText Typo="Typo.subtitle2"> Related Work: </MudText>
+            @foreach (int i in key.RelatedWorkKeys)
+              {
+                HyperLink item = experienceData.RelatedWork[i];
+                <MudLink 
+                  Typo="Typo.subtitle2" 
+                  Href="@(relativePath + "#" + item.Link)" 
+                  Color="Color.Secondary" 
+                  @onclick="@(e => (HandleLinkClick(item.Link)))"
+                >
+                  @item.Text
+                </MudLink>
+              }
+          </MudStack>
+        }
+    </div>
+    <div Class="pt-1">
+      <div Class="conditional_flex">
         <MudImage Src="@experienceData.ImageUrl"
-          Width="@key.ImageSize"
-          Class="rounded-lg mr-4 mb-2" 
+          Class="responsive_image"
+          Fluid="true"
           ObjectFit="ObjectFit.Contain"
+
         />
-      </MudStack>
-    </MudItem>
-  </MudGrid>
+      </div>
+      @foreach (HyperLink sentence in experienceData.Description)
+        {
+          <MudStack Row="true" Class="pl-3">
+            <MudText Typo="Typo.body1">• </MudText>
+            <MudText Typo="Typo.body1">@(sentence.Text)</MudText>
+          </MudStack>
+        }
+    </div>
+  </div>
+
 </MudCard>
 
 @code {

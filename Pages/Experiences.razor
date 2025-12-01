@@ -1,6 +1,6 @@
-<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-xs-5" id="Experience">
+<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" id="Experience">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Experience</MudText>
-  <MudStack Class="align-center py-4" Spacing="10">
+  <MudStack Class="align-center py-4 mx-1" Spacing="10">
 
       @for (int i = 0; i < (keys.Count < 2 ? keys.Count : 2); i++)
       {
@@ -12,7 +12,7 @@
    @if (keys.Count > 2)
     {
       <MudCollapse Expanded="_expanded">
-        <MudStack Class="align-center py-5" Spacing="10">
+        <MudStack Class="align-center py-4 mx-1" Spacing="10">
             @for (int i = 2; i < keys.Count; i++)
             {
               int savedI = i;

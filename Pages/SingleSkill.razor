@@ -1,13 +1,13 @@
 @inject NavigationManager NavManager
 
-<MudCard Style="background-color: #EEF0F2; width: 27vw;" Elevation="5" id="@skillData.Key">
+<MudCard Style="background-color: #EEF0F2;" Class="variable_width" Elevation="5" id="@skillData.Key">
   <MudStack Class="pa-4" Spacing="0">
-    <MudStack Row="true" Justify="Justify.SpaceBetween">
+    <MudStack Row="true" Justify="Justify.SpaceBetween" Wrap="Wrap.Wrap">
       <MudStack Spacing="0">
         <MudText Color=Color.Primary Typo="Typo.h3">@skillData.SkillName</MudText>
         <MudText Typo="Typo.subtitle2" Class="pl-4">@skillData.Subtitle</MudText>
       </MudStack>
-      <MudImage Src="@skillData.ImageUrl" Style="width: 8vh; height: 8vh;" ObjectFit="ObjectFit.Contain"/>
+      <MudImage Src="@skillData.ImageUrl" Style="max-width: 8vw; max-height: 8vh;" ObjectFit="ObjectFit.Contain"/>
     </MudStack>
     @if (skillData.SkillExperiences[0].Text != "na")
     {

@@ -1,8 +1,8 @@
 @inject NavigationManager NavManager
 
-<MudPaper Elevation="0" Style="background-color: #EEF0F2;" Class="px-md-20 px-sm-10 px-xs-5 pb-5" id="Skills">
+<MudPaper Elevation="0" Style="background-color: #EEF0F2;" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" id="Skills">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
-    <MudGrid Justify="Justify.Center" Class="mt-0" Spacing="8">
+    <MudGrid Justify="Justify.Center" Class="mt-0" >
       @for (int i = 0; i < (keys.Count < 3 ? keys.Count : 3); i++)
       {
         int savedI = i;
@@ -26,7 +26,7 @@
         </MudGrid>
       </MudCollapse>
 
-      <MudGrid Justify="Justify.Center" Class="pt-10">
+      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5">
         <MudToggleIconButton
           @bind-Toggled="_expanded"
           Icon="@Icons.Material.Filled.KeyboardArrowDown"
