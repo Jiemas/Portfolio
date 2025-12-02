@@ -24,17 +24,18 @@
           Typo="Typo.subtitle1" 
           Href="@(relativePath + "#" + projectData.Overview.RelatedWork.Link)"
           @onclick="@(e => (HandleLinkClick(projectData.Overview.RelatedWork.Link)))"
+          Color="Color.Primary"
         >
           @(projectData.Overview.RelatedWork.Text)
         </MudLink>
       </MudStack>
       <MudStack Row="true" Spacing="1">
         <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)">
+        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary">
           @(projectData.Overview.SourceCode.Text)
         </MudLink>
         <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)">
+        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary">
           @(projectData.Overview.DeployLink.Text)
         </MudLink>
       </MudStack>
@@ -51,6 +52,7 @@
           <MudLink 
             Href="@(relativePath + "#" + item.Link)" 
             Typo="Typo.subtitle1"
+            Color="Color.Primary"
             @onclick="@(e => (HandleLinkClick(item.Link)))"
           >
             @item.Text
