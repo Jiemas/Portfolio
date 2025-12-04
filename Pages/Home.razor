@@ -1,7 +1,6 @@
 ﻿@page "/"
-@inject NavigationManager NavManager
-
 @inject DatabaseService DbService
+@inject ExpandedStates ExpandedStates
 
 <Header Links="headers"/>
 
@@ -24,7 +23,7 @@
 }
 else
 {
-    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandSkill"/>
+    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys" OnChildLinkClick="HandleLinkClick"/>
 
     <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandExperience"/>
 
@@ -51,6 +50,7 @@ else
 
     private FirebaseData? Fbdata;
 
+
     protected override async Task OnInitializedAsync()
     {
         Fbdata = await DbService.GetAllDataAsync<FirebaseData>();
@@ -58,8 +58,11 @@ else
         if (order is not null && Fbdata is not null)
         {
             skillKeys = Fbdata.Keys[order].SkillKeys;
+            ExpandedStates.skillKeys = skillKeys;
             experienceKeys = Fbdata.Keys[order].ExperienceKeys;
+            ExpandedStates.experienceKeys = experienceKeys;
             projectKeys = Fbdata.Keys[order].ProjectKeys;
+            ExpandedStates.projectKeys = projectKeys;
         }
 
     }
@@ -83,6 +86,5 @@ else
         }
         @* Console.WriteLine(data); *@
     }
-
 
 }

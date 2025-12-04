@@ -4,6 +4,13 @@
 
   @if (keys.Count > 1)
   {
+    <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(_expanded ? "display: none" : "display: flex")">
+      <MudToggleIconButton
+        @bind-Toggled="_expanded"
+        Icon="@Icons.Material.Filled.KeyboardArrowDown"
+        Size="Size.Large"
+      />
+    </MudGrid>
     <MudCollapse Expanded="@_expanded">
       @for (int i = 0; i < keys.Count; i++)
       {
@@ -11,15 +18,12 @@
         <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]" OnLinkClick="HandleLinkClick"/> 
       }
     </MudCollapse>
-
-    <MudGrid Justify="Justify.Center" Class="pt-10">
+    <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!_expanded ? "display: none" : "display: flex")">
       <MudToggleIconButton
         @bind-Toggled="_expanded"
-        Icon="@Icons.Material.Filled.KeyboardArrowDown"
-        ToggledIcon="@Icons.Material.Filled.KeyboardArrowUp"
+        Icon="@Icons.Material.Filled.KeyboardArrowUp"
         Size="Size.Large"
-      >
-      </MudToggleIconButton>
+      />
     </MudGrid>
   }
 </MudPaper>

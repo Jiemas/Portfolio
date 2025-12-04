@@ -1,4 +1,5 @@
 @inject NavigationManager NavManager
+@inject ExpandedStates ExpandedStates
 
 <MudPaper Elevation="0" Style="background-color: #EEF0F2;" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" id="Skills">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
@@ -14,34 +15,32 @@
 
     @if (keys.Count > 3)
     {
-      <MudCollapse Expanded="_expanded">
+      <MudCollapse Expanded="@ExpandedStates.SkillExpanded" aria-hidden="@(ExpandedStates.SkillExpanded ? "false" : "true")">
         <MudGrid Justify="Justify.Center" Class="mt-0 pb-5" Spacing="8">
           @for (int i = 3; i < keys.Count; i++)
           {
             int savedI = i;
             <MudItem style="display: flex;">
-              <SingleSkill skillData="@(skillsDict[keys[savedI]])" OnLinkClick="HandleLinkClick"/>
+              <SingleSkill skillData="@(skillsDict[keys[savedI]])" OnLinkClick="HandleLinkClick" Disabled="@(!ExpandedStates.SkillExpanded)"/>
             </MudItem>
           }
         </MudGrid>
       </MudCollapse>
-
       <MudGrid Justify="Justify.Center" Class="pt-10 pb-5">
         <MudToggleIconButton
-          @bind-Toggled="_expanded"
+          @bind-Toggled="@ExpandedStates.SkillExpanded"
           Icon="@Icons.Material.Filled.KeyboardArrowDown"
           ToggledIcon="@Icons.Material.Filled.KeyboardArrowUp"
           Size="Size.Large"
-        >
-        </MudToggleIconButton>
+        />
       </MudGrid>
     }
 </MudPaper>
 
 
 @code {
-  [Parameter]
-  public bool _expanded { get; set; }
+  @* [Parameter] *@
+  @* public bool _expanded = ExpandedStates.SkillExpanded; *@
 
   [Parameter]
   public required Dictionary<string, Skill> skillsDict { get; set; }
@@ -55,6 +54,11 @@
   private async Task HandleLinkClick(string data)
   {
     await OnChildLinkClick.InvokeAsync(data);
+  }
+
+  protected override void OnInitialized()
+  {
+    ExpandedStates.SkillChange += StateHasChanged;
   }
 
 }

@@ -1,0 +1,36 @@
+﻿@inject IJSRuntime JS
+@inject NavigationManager NavManager
+@inject ExpandedStates ExpandedStates
+
+<MudLink Href="@($"{relativePath}#{Href}")" @onclick="@(() => Focus(Href))" class="@Class" Typo="@Typo" Color="@Color" Disabled="@Disabled">
+    @ChildContent
+</MudLink>
+
+@code {
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public Typo Typo { get; set; }
+
+    [Parameter]
+    public Color Color { get; set; }
+
+    [Parameter] public string Href { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+
+    private async Task Focus(string data)
+    {
+      await JS.InvokeVoidAsync("focusAnchor", Href);
+      ExpandedStates.HandleAnchorClick(data);
+
+    }
+    private string relativePath = null!;
+    protected override void OnInitialized()
+    {
+        relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
+    }
+}

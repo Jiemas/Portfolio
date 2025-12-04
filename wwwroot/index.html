@@ -34,6 +34,21 @@
         <a href="." class="reload">Reload</a>
         <span class="dismiss">🗙</span>
     </div>
+    <script>
+        window.focusAnchor = (id) => 
+        { 
+            const el = document.getElementById(id); 
+            if (!el) return; 
+            // Ensure element can be focused 
+            if (!el.hasAttribute("tabindex")) 
+            { 
+                el.setAttribute("tabindex", "-1"); 
+            } 
+            el.focus(); 
+            setTimeout(() => el.scrollIntoView(), 250);
+        };
+    </script>
+
     <script src="_framework/blazor.webassembly.js"></script>
     <!-- Important: Increment the version parameter whenever you update MudBlazor to prevent caching issues -->
     <script src="_content/MudBlazor/MudBlazor.min.js?v=1"></script>
