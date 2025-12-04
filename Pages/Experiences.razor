@@ -1,3 +1,5 @@
+@inject ExpandedStates ExpandedStates
+
 <MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" id="Experience">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Experience</MudText>
   <MudStack Class="align-center py-4 mx-1" Spacing="10">
@@ -5,35 +7,38 @@
       @for (int i = 0; i < (keys.Count < 2 ? keys.Count : 2); i++)
       {
         int savedI = i;
-        <SingleExperience experienceData="@(experienceDict[keys[savedI].Key])" key=@keys[savedI] OnLinkClick="HandleLinkClick"/>
+        <SingleExperience experienceData="@(experienceDict[keys[savedI].Key])" key=@keys[savedI]/>
       }
   </MudStack>
 
    @if (keys.Count > 2)
     {
-      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(_expanded ? "display: none" : "display: flex")">
-          <MudToggleIconButton
-            @bind-Toggled="_expanded"
-            Icon="@Icons.Material.Filled.KeyboardArrowDown"
-            Size="Size.Large"
-          />
-      </MudGrid>
 
-      <MudCollapse Expanded="_expanded">
+      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" 
+        style="@(ExpandedStates.ExperienceExpanded ? "display: none" : "display: flex")"
+      >
+        <MudToggleIconButton
+          @bind-Toggled="ExpandedStates.ExperienceExpanded"
+          Icon="@Icons.Material.Filled.KeyboardArrowDown"
+          Size="Size.Large"
+          aria-label="Expand experience section"
+        />
+      </MudGrid>
+      <MudCollapse Expanded="@ExpandedStates.ExperienceExpanded" aria-hidden="@(ExpandedStates.ExperienceExpanded ? "false" : "true")">
         <MudStack Class="align-center py-4 mx-1" Spacing="10">
             @for (int i = 2; i < keys.Count; i++)
             {
               int savedI = i;
-              <SingleExperience experienceData="@(experienceDict[keys[savedI].Key])" key=@keys[savedI] OnLinkClick="HandleLinkClick"/>
+              <SingleExperience experienceData="@(experienceDict[keys[savedI].Key])" key=@keys[savedI] Disabled="@(!ExpandedStates.ExperienceExpanded)"/>
             }
         </MudStack>
       </MudCollapse>
-
-      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!_expanded ? "display: none" : "display: flex")">
+      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!ExpandedStates.ExperienceExpanded ? "display: none" : "display: flex")">
         <MudToggleIconButton
-          @bind-Toggled="_expanded"
+          @bind-Toggled="ExpandedStates.ExperienceExpanded"
           Icon="@Icons.Material.Filled.KeyboardArrowUp"
           Size="Size.Large"
+          aria-label="Expand experience section"
         />
       </MudGrid>
     }
@@ -43,19 +48,14 @@
 
 @code {
   [Parameter]
-  public bool _expanded { get; set; }
-
-  [Parameter]
   public required Dictionary<string, Experience> experienceDict { get; set; }
 
   [Parameter]
   public required List<ExperienceKey> keys {get; set;}
 
-  [Parameter]
-  public EventCallback<string> OnChildLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
+  protected override void OnInitialized()
   {
-    await OnChildLinkClick.InvokeAsync(data);
+    ExpandedStates.ExperienceChange += StateHasChanged;
   }
+
 }

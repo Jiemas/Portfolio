@@ -19,3 +19,15 @@
         justify-content: center;
     }
 }
+
+@media only screen and (min-width: 600px) {
+    .responsive_card {
+        width: 82vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .responsive_card {
+        width: 90vw;   
+    }
+}

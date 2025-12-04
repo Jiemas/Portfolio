@@ -2,6 +2,8 @@
 @inject DatabaseService DbService
 @inject ExpandedStates ExpandedStates
 
+<AnchorLink Typo="Typo.h5" Color="Color.Primary" Href="start" Class="skip-link">Skip to main content</AnchorLink>
+
 <Header Links="headers"/>
 
 <HeroImage />
@@ -23,19 +25,18 @@
 }
 else
 {
-    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys" OnChildLinkClick="HandleLinkClick"/>
+    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys"/>
 
-    <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandExperience"/>
+    <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys"/>
 
-    <Projects projectDict="@Fbdata.Projects" keys="@projectKeys" OnChildLinkClick="HandleLinkClick" _expanded="expandProject"/>
+    <Projects projectDict="@Fbdata.Projects" keys="@projectKeys"/>
 }
 
 <Footer />
 
-<MudScrollToTop>
+@* <MudScrollToTop>
     <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" Size="Size.Small"/>
-</MudScrollToTop>
-
+</MudScrollToTop> *@
 
 @code {
     [Parameter]
@@ -50,7 +51,6 @@ else
 
     private FirebaseData? Fbdata;
 
-
     protected override async Task OnInitializedAsync()
     {
         Fbdata = await DbService.GetAllDataAsync<FirebaseData>();
@@ -64,27 +64,5 @@ else
             projectKeys = Fbdata.Keys[order].ProjectKeys;
             ExpandedStates.projectKeys = projectKeys;
         }
-
     }
-
-    bool expandSkill = false;
-    bool expandExperience = false;
-    bool expandProject = false;
-
-    private void HandleLinkClick(string data){
-        @* string anchor = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[1]; *@
-        if (data[0] == 's' && !skillKeys.GetRange(0, 3).Contains(data))
-        {
-            Console.WriteLine($"{data} not found within first three skills");
-            expandSkill = true;
-        } else if (data[0] == 'e' && experienceKeys[0].Key != data && experienceKeys[1].Key != data)
-        {
-            expandExperience = true;
-        } else if (data[0] == 'p' && projectKeys[0].Key != data)
-        {
-            expandProject = true;
-        }
-        @* Console.WriteLine(data); *@
-    }
-
 }

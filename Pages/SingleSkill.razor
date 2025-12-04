@@ -7,7 +7,11 @@
         <MudText Color=Color.Primary Typo="Typo.h3">@skillData.SkillName</MudText>
         <MudText Typo="Typo.subtitle2" Class="pl-4">@skillData.Subtitle</MudText>
       </MudStack>
-      <MudImage Src="@skillData.ImageUrl" Style="max-width: 8vw; max-height: 8vh;" ObjectFit="ObjectFit.Contain"/>
+      <MudImage 
+        Src="@skillData.ImageUrl" 
+        Style="max-width: 8vw; max-height: 8vh;" 
+        ObjectFit="ObjectFit.Contain" 
+        Alt=@(skillData.ImageAlt == "na" ? "" : skillData.ImageAlt)/>
     </MudStack>
     @if (skillData.SkillExperiences[0].Text != "na")
     {
@@ -40,13 +44,5 @@
 
   [Parameter]
   public bool Disabled {get; set;}
-
-  [Parameter]
-  public EventCallback<string> OnLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
-  {
-    await OnLinkClick.InvokeAsync(data);
-  }
 
 }

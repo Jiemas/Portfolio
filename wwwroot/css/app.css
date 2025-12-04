@@ -112,3 +112,40 @@ code {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+/* Applies to all buttons and links */
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid #7DDF64 !important;
+    outline-offset: 3px !important;
+    border-radius: 4px; /* optional but looks nicer */
+}
+
+.skip-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 12px 20px;
+    background: #fff;
+    color: #000;
+    font-weight: bold;
+    border: 2px solid #ff9800;
+    z-index: 1000;
+
+    /* Start hidden offscreen */
+    transform: translateY(-100%);
+    opacity: 0;
+
+    /* Remove from pointer hitbox when hidden */
+    pointer-events: none;
+
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Visible only when focused via keyboard */
+.skip-link:focus-visible {
+    top: 10vh;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}

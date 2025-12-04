@@ -10,6 +10,7 @@ public class FirebaseData
 public class Skill 
 {
   public required string ImageUrl { get; set; }
+  public required string ImageAlt { get; set; }
   public required string Key { get; set; }
   public required string SkillName { get; set; }
 
@@ -31,6 +32,7 @@ public class Experience
   public required string Key { get; set; }
   public required string ExperienceName { get; set; }
   public required string ImageUrl { get; set; }
+  public required string ImageAlt { get; set; }
 
   public required List<HyperLink> Description { get; set; }
 
@@ -85,6 +87,8 @@ public class Project
   public required List<string> BulletPoints { get; set; }
   public required string ImageUrl { get; set; }
   public required string Key { get; set; }
+  public required string ImageAlt { get; set; }
+  public required string EmbedElementAlt { get; set; }
 }
 
 public class OverviewInfo
