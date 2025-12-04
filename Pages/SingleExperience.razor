@@ -1,36 +1,28 @@
 @inject NavigationManager NavManager
 
-<MudCard Style="width: 100%;" Elevation="5" id="@experienceData.Key" Class="pb-2">  
+<MudCard Elevation="5" id="@experienceData.Key" Class="pb-2 responsive_card">  
   <div class="pa-4">
     <MudText Color=Color.Primary Typo="Typo.h3">@experienceData.ExperienceName</MudText>
     <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2vw;">
       <MudText Typo="Typo.subtitle2">
         @(experienceData.BasicInformation.RelatedOrganization + " · " + experienceData.BasicInformation.WorkType)
       </MudText>
-      @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
       <MudText Typo="Typo.subtitle2">
         @(experienceData.BasicInformation.TimeWorked[0] + " - " + experienceData.BasicInformation.TimeWorked[1])
       </MudText>
-      @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
       <MudText Typo="Typo.subtitle2">@experienceData.BasicInformation.Location</MudText>
     
 
       @if (experienceData.SkillsUsed[0].Text != "na")
         {
           <MudStack Row="true" Spacing="2">
-            @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
             <MudText Typo="Typo.subtitle2"> Skills Used: </MudText>
             @foreach (int i in key.SkillsUsedKeys)
               {
                 HyperLink item = experienceData.SkillsUsed[i];
-                <MudLink 
-                  Typo="Typo.subtitle2" 
-                  Href="@(relativePath + "#" + item.Link)" 
-                  Color="Color.Primary" 
-                  @onclick="@(e => (HandleLinkClick(item.Link)))"
-                >
+                <AnchorLink Typo="Typo.subtitle2" Href="@item.Link" Color="Color.Primary" Disabled="@Disabled">
                   @item.Text
-                </MudLink>
+                </AnchorLink>
               }
           </MudStack>
         }
@@ -38,19 +30,13 @@
         @if (experienceData.RelatedWork[0].Text != "na")
         {
           <MudStack Row="true" Spacing="2">
-          @* <MudText Typo="Typo.subtitle2" Class="px-3"> | </MudText> *@
             <MudText Typo="Typo.subtitle2"> Related Work: </MudText>
             @foreach (int i in key.RelatedWorkKeys)
               {
                 HyperLink item = experienceData.RelatedWork[i];
-                <MudLink 
-                  Typo="Typo.subtitle2" 
-                  Href="@(relativePath + "#" + item.Link)" 
-                  Color="Color.Primary" 
-                  @onclick="@(e => (HandleLinkClick(item.Link)))"
-                >
+                <AnchorLink Typo="Typo.subtitle2" Href="@item.Link" Color="Color.Primary" Disabled="@Disabled">
                   @item.Text
-                </MudLink>
+                </AnchorLink>
               }
           </MudStack>
         }
@@ -61,7 +47,7 @@
           Class="responsive_image"
           Fluid="true"
           ObjectFit="ObjectFit.Contain"
-
+          Alt=@(experienceData.ImageAlt == "na" ? "" : experienceData.ImageAlt)
         />
       </div>
       @foreach (HyperLink sentence in experienceData.Description)
@@ -83,18 +69,7 @@
   [Parameter]
   public required ExperienceKey key {get; set;}
 
-  private string relativePath = null!;
-  protected override void OnInitialized()
-  {
-      relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
-  }
-
   [Parameter]
-  public EventCallback<string> OnLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
-  {
-    await OnLinkClick.InvokeAsync(data);
-  }
+  public bool Disabled {get; set;}
 
 }

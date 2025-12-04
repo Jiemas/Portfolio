@@ -1,45 +1,47 @@
+@inject ExpandedStates ExpandedStates
+
 <MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" Style="background-color: #EEF0F2;" id="Projects">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10 pb-4">Projects</MudText>
-  <SingleProject projectData="@projectDict[keys[0].Key]" key="@keys[0]" OnLinkClick="HandleLinkClick"/>
+  <SingleProject projectData="@projectDict[keys[0].Key]" key="@keys[0]"/>
 
   @if (keys.Count > 1)
   {
-    <MudCollapse Expanded="@_expanded">
+    <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(ExpandedStates.ProjectExpanded ? "display: none" : "display: flex")">
+      <MudToggleIconButton
+        @bind-Toggled="ExpandedStates.ProjectExpanded"
+        Icon="@Icons.Material.Filled.KeyboardArrowDown"
+        Size="Size.Large"
+        aria-label="Expand project section"
+      />
+    </MudGrid>
+    <MudCollapse Expanded="@ExpandedStates.ProjectExpanded" aria-hidden="@(ExpandedStates.ProjectExpanded ? "false" : "true")">
       @for (int i = 0; i < keys.Count; i++)
       {
         int savedI = i;
-        <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]" OnLinkClick="HandleLinkClick"/> 
+        <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]"/> 
       }
     </MudCollapse>
-
-    <MudGrid Justify="Justify.Center" Class="pt-10">
+    <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!ExpandedStates.ProjectExpanded ? "display: none" : "display: flex")">
       <MudToggleIconButton
-        @bind-Toggled="_expanded"
-        Icon="@Icons.Material.Filled.KeyboardArrowDown"
-        ToggledIcon="@Icons.Material.Filled.KeyboardArrowUp"
+        @bind-Toggled="ExpandedStates.ProjectExpanded"
+        Icon="@Icons.Material.Filled.KeyboardArrowUp"
         Size="Size.Large"
-      >
-      </MudToggleIconButton>
+        aria-label="Expand project section"
+      />
     </MudGrid>
   }
 </MudPaper>
 
 @code {
   [Parameter]
-  public bool _expanded { get; set; }
-
-  [Parameter]
   public required Dictionary<string, Project> projectDict { get; set; }
 
   [Parameter]
   public required List<ProjectKey> keys {get; set;}
 
-  [Parameter]
-  public EventCallback<string> OnChildLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
+  protected override void OnInitialized()
   {
-    await OnChildLinkClick.InvokeAsync(data);
+    ExpandedStates.ProjectChange += StateHasChanged;
   }
 
 }

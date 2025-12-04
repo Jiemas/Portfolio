@@ -1,4 +1,4 @@
-@inject NavigationManager NavManager
+@inject ExpandedStates ExpandedStates
 
 <MudCard Style="background-color: #EEF0F2;" Class="variable_width" Elevation="5" id="@skillData.Key">
   <MudStack Class="pa-4" Spacing="0">
@@ -7,23 +7,20 @@
         <MudText Color=Color.Primary Typo="Typo.h3">@skillData.SkillName</MudText>
         <MudText Typo="Typo.subtitle2" Class="pl-4">@skillData.Subtitle</MudText>
       </MudStack>
-      <MudImage Src="@skillData.ImageUrl" Style="max-width: 8vw; max-height: 8vh;" ObjectFit="ObjectFit.Contain"/>
+      <MudImage 
+        Src="@skillData.ImageUrl" 
+        Style="max-width: 8vw; max-height: 8vh;" 
+        ObjectFit="ObjectFit.Contain" 
+        Alt=@(skillData.ImageAlt == "na" ? "" : skillData.ImageAlt)/>
     </MudStack>
     @if (skillData.SkillExperiences[0].Text != "na")
     {
       <MudText Typo="Typo.body1"> Experiences </MudText>
       @foreach (HyperLink item in skillData.SkillExperiences)
         {
-          string relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
-          <MudLink 
-            Typo="Typo.subtitle1" 
-            Href="@(relativePath + "#" + item.Link)" 
-            Color="Color.Primary" 
-            Class="pl-4"
-            @onclick="@(e => (HandleLinkClick(item.Link)))"
-          >
+          <AnchorLink Typo="Typo.subtitle1" Href="@item.Link" Color="Color.Primary" Class="pl-4" Disabled="@Disabled">
             @item.Text
-          </MudLink>
+          </AnchorLink>
         }
     }
 
@@ -32,16 +29,9 @@
       <MudText Typo="Typo.body1"> Projects </MudText>
       @foreach (HyperLink item in skillData.SkillProjects)
         {
-          string relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
-          <MudLink
-            Typo="Typo.subtitle1" 
-            Href="@(relativePath + "#" + item.Link)" 
-            Color="Color.Primary" 
-            Class="pl-4"
-            @onclick="@(e => (HandleLinkClick(item.Link)))"
-          >
+          <AnchorLink Typo="Typo.subtitle1" Href="@item.Link" Color="Color.Primary" Class="pl-4" Disabled="@Disabled">
             @item.Text
-          </MudLink>
+          </AnchorLink>
         }
     }
   </MudStack>
@@ -53,11 +43,6 @@
   public required Skill skillData {get; set;}
 
   [Parameter]
-  public EventCallback<string> OnLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
-  {
-    await OnLinkClick.InvokeAsync(data);
-  }
+  public bool Disabled {get; set;}
 
 }

@@ -1,14 +1,30 @@
 @inject NavigationManager NavManager
+@inject IJSRuntime JS
 
-<div style="position: relative; width: 100%; height: 93vh; overflow: hidden;">
-    <MudImage Src="https://i.imgur.com/IabDEkV.jpeg" Alt="Hero Image Description" ObjectFit="ObjectFit.Cover" Style="width: 100%; height: 100%; filter: brightness(50%); filter: blur(3px); transform: scale(1.1);" />
+<div style="position: relative; width: 100%; height: 93vh; overflow: hidden;" id="start">
+    <MudImage 
+      Src="https://i.imgur.com/IabDEkV.jpeg" 
+      ObjectFit="ObjectFit.Cover" 
+      Style="width: 100%; height: 100%; filter: brightness(50%); filter: blur(3px); transform: scale(1.1);" 
+      Alt=""
+    />
     <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; ">
         <MudAvatar Style="height:300px; width:300px;">
-          <MudImage Src="https://i.imgur.com/vipCtHj.jpeg" Alt="Jiemas Rubio" ObjectFit="ObjectFit.Cover" />
+          <MudImage Src="https://i.imgur.com/vipCtHj.jpeg" Alt="" ObjectFit="ObjectFit.Cover" />
         </MudAvatar>
-        <MudText Typo="Typo.h2">Hi, I'm Jiemas</MudText>
-        <MudText Typo="Typo.subtitle1">A recent graduate from UC Santa Cruz and excited to work in the tech sector!</MudText>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" Href="@(relativePath + "#Contact")">Contact</MudButton>
+        <div style="background-color: rgba(0, 0, 0, 0.25);">
+          <MudText Typo="Typo.h1">Hi, I'm Jiemas</MudText>
+          <MudText Typo="Typo.subtitle1">A recent graduate from UC Santa Cruz and excited to work in the tech sector!</MudText>
+        </div>
+        <MudButton 
+          Variant="Variant.Filled" 
+          Color="Color.Primary" 
+          Class="mt-4" 
+          Href="@(relativePath + "#Contact")"
+          @onclick="Focus"
+        >
+          Contact
+        </MudButton>
     </div>
 </div>
 
@@ -18,4 +34,6 @@
   {
       relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
   }
+  async Task Focus() =>
+    await JS.InvokeVoidAsync("focusAnchor", "Contact");
 }

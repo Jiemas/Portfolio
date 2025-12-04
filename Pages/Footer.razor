@@ -11,29 +11,35 @@
             ObjectFit="ObjectFit.Contain" 
             Height="250"
             Class="rounded-lg mt-3 header_disappear" 
+            Alt=""
         />
         <div class="flex-grow-1 header_disappear" />
         @* <div style="display: flex"> *@
         <MudStack>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_disappear" Href="@(relativePath + "#AboutMe")">About Me</MudLink>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_appear" Href="@(relativePath + "#AboutMe")">About</MudLink>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="@(relativePath + "#Skills")">Skills</MudLink>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_disappear" Href="@(relativePath + "#Experience")">Experience</MudLink>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_appear" Href="@(relativePath + "#Experience")">Work</MudLink>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="@(relativePath + "#Projects")">Projects</MudLink>
-            <MudHidden>
-            <MudLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="@(relativePath + "#Contact")">Contact</MudLink>
-            </MudHidden>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_disappear" Href="AboutMe">About Me</AnchorLink>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_appear" Href="AboutMe">About</AnchorLink>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="Skills">Skills</AnchorLink>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_disappear" Href="Experience">Experience</AnchorLink>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_appear" Href="Experience">Work</AnchorLink>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="Projects">Projects</AnchorLink>
         </MudStack>
         <MudStack>
             <MudText Typo="Typo.h5" Color="Color.Secondary" Class="header_text_swap_disappear">jiemasrubio@yahoo.com</MudText>
             <MudText Typo="Typo.h6" Color="Color.Secondary" Class="header_text_swap_appear">jiemasrubio@yahoo.com</MudText>
             <MudText Typo="Typo.h5" Color="Color.Secondary">(916) 743-0617</MudText>
             <div style="display: flex; flex-wrap: wrap;">
-                <MudIconButton Icon="@Icons.Material.Filled.Email" Title="jiemasrubio@yahoo.com" Color="Color.Secondary" Href="mailto:jiemasrubio@yahoo.com"/>
-                <MudIconButton Icon="@Icons.Material.Filled.Phone" Title="(916)743-0617" Color="Color.Secondary" Href="tel:9167430617"/>
-                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Secondary" Href="https://github.com/Jiemas"/>
-                <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Title="LinkedIn" Color="Color.Secondary" Href="https://www.linkedin.com/in/jiemas-rubio/"/>
+                <MudIconButton Icon="@Icons.Material.Filled.Email" Title="jiemasrubio@yahoo.com" 
+                    Color="Color.Secondary" Href="mailto:jiemasrubio@yahoo.com" aria-label="Send email to jiemasrubio@yahoo.com"
+                />
+                <MudIconButton Icon="@Icons.Material.Filled.Phone" Title="(916)743-0617" 
+                    Color="Color.Secondary" Href="tel:9167430617" aria-label="Call Jiemas's phone number, 9167430617"
+                />
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" 
+                    Color="Color.Secondary" Href="https://github.com/Jiemas" aria-label="Jiemas's Git Hub Account"
+                />
+                <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Title="LinkedIn" 
+                    Color="Color.Secondary" Href="https://www.linkedin.com/in/jiemas-rubio/" aria-label="Jiemas's LinkedIn Account"
+                />
             </div>
         </MudStack>
         @* </div> *@

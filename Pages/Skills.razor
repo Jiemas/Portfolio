@@ -1,4 +1,4 @@
-@inject NavigationManager NavManager
+@inject ExpandedStates ExpandedStates
 
 <MudPaper Elevation="0" Style="background-color: #EEF0F2;" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" id="Skills">
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
@@ -7,41 +7,48 @@
       {
         int savedI = i;
         <MudItem style="display: flex;">
-          <SingleSkill skillData="@(skillsDict[keys[savedI]])" OnLinkClick="HandleLinkClick"/>
+          <SingleSkill skillData="@(skillsDict[keys[savedI]])"/>
         </MudItem>
       }
     </MudGrid>
 
     @if (keys.Count > 3)
     {
-      <MudCollapse Expanded="_expanded">
+      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" 
+        style="@(ExpandedStates.SkillExpanded ? "display: none" : "display: flex")"
+      >
+        <MudToggleIconButton
+          @bind-Toggled="ExpandedStates.SkillExpanded"
+          Icon="@Icons.Material.Filled.KeyboardArrowDown"
+          Size="Size.Large"
+          aria-label="Expand skills section"
+        />
+      </MudGrid>
+      <MudCollapse Expanded="@ExpandedStates.SkillExpanded" aria-hidden="@(ExpandedStates.SkillExpanded ? "false" : "true")">
         <MudGrid Justify="Justify.Center" Class="mt-0 pb-5" Spacing="8">
           @for (int i = 3; i < keys.Count; i++)
           {
             int savedI = i;
             <MudItem style="display: flex;">
-              <SingleSkill skillData="@(skillsDict[keys[savedI]])" OnLinkClick="HandleLinkClick"/>
+              <SingleSkill skillData="@(skillsDict[keys[savedI]])" Disabled="@(!ExpandedStates.SkillExpanded)"/>
             </MudItem>
           }
         </MudGrid>
       </MudCollapse>
-
-      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5">
+      <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!ExpandedStates.SkillExpanded ? "display: none" : "display: flex")">
         <MudToggleIconButton
-          @bind-Toggled="_expanded"
-          Icon="@Icons.Material.Filled.KeyboardArrowDown"
-          ToggledIcon="@Icons.Material.Filled.KeyboardArrowUp"
+          @bind-Toggled="ExpandedStates.SkillExpanded"
+          Icon="@Icons.Material.Filled.KeyboardArrowUp"
           Size="Size.Large"
-        >
-        </MudToggleIconButton>
+          aria-label="Expand skills section"
+        />
       </MudGrid>
+
     }
 </MudPaper>
 
 
 @code {
-  [Parameter]
-  public bool _expanded { get; set; }
 
   [Parameter]
   public required Dictionary<string, Skill> skillsDict { get; set; }
@@ -49,12 +56,9 @@
   [Parameter]
   public required List<string> keys {get; set;}
 
-  [Parameter]
-  public EventCallback<string> OnChildLinkClick { get; set;}
-
-  private async Task HandleLinkClick(string data)
+  protected override void OnInitialized()
   {
-    await OnChildLinkClick.InvokeAsync(data);
+    ExpandedStates.SkillChange += StateHasChanged;
   }
 
 }

@@ -8,6 +8,7 @@
       Class="rounded-lg mr-4 mb-2" 
       ObjectFit="ObjectFit.Contain"
       Fluid="true"
+      Alt="@projectData.EmbedElementAlt"
     />
     
   </MudItem>
@@ -20,22 +21,17 @@
       <MudText Typo="Typo.subtitle1">@("• " + projectData.Overview.RelatedOrganization)</MudText>
       <MudStack Row="true" Spacing="1">
         <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-        <MudLink 
-          Typo="Typo.subtitle1" 
-          Href="@(relativePath + "#" + projectData.Overview.RelatedWork.Link)"
-          @onclick="@(e => (HandleLinkClick(projectData.Overview.RelatedWork.Link)))"
-          Color="Color.Primary"
-        >
+        <AnchorLink Typo="Typo.subtitle1" Href="@projectData.Overview.RelatedWork.Link"Color="Color.Primary" Disabled="@Disabled">
           @(projectData.Overview.RelatedWork.Text)
-        </MudLink>
+        </AnchorLink>
       </MudStack>
       <MudStack Row="true" Spacing="1">
         <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary">
+        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
           @(projectData.Overview.SourceCode.Text)
         </MudLink>
         <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary">
+        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary" Disabled="@Disabled">
           @(projectData.Overview.DeployLink.Text)
         </MudLink>
       </MudStack>
@@ -49,14 +45,9 @@
         HyperLink item = projectData.SkillsUsed[i];
         <MudStack Row="true" Class="pl-2" Spacing="1">
           <MudText Typo="Typo.subtitle1">•</MudText>
-          <MudLink 
-            Href="@(relativePath + "#" + item.Link)" 
-            Typo="Typo.subtitle1"
-            Color="Color.Primary"
-            @onclick="@(e => (HandleLinkClick(item.Link)))"
-          >
+          <AnchorLink Href="@item.Link" Typo="Typo.subtitle1" Color="Color.Primary" Disabled="@Disabled">
             @item.Text
-          </MudLink>
+          </AnchorLink>
         </MudStack>
       }
     <MudDivider/>
@@ -70,6 +61,7 @@
         Icon="@Icons.Material.Filled.OpenInFull"
         ToggledIcon="@Icons.Material.Filled.CloseFullscreen"
         Style="float: right;"
+        aria-label="Show more details on project"
       />
     </div>
   </MudItem>
@@ -96,6 +88,7 @@
         ObjectFit="ObjectFit.Contain" 
         Class="rounded-lg pa-4" 
         Fluid="true"
+        Alt=@(projectData.ImageAlt == "na" ? "" : projectData.ImageAlt)
       />
     </MudItem>
   </MudGrid>
@@ -111,17 +104,7 @@
   [Parameter]
   public required ProjectKey key {get; set;}
 
-  private string relativePath = null!;
-  protected override void OnInitialized()
-  {
-      relativePath = NavManager.ToBaseRelativePath(NavManager.Uri).Split("#")[0];
-  }
-
   [Parameter]
-  public EventCallback<string> OnLinkClick { get; set;}
+  public bool Disabled {get; set;}
 
-  private async Task HandleLinkClick(string data)
-  {
-    await OnLinkClick.InvokeAsync(data);
-  }
 }
