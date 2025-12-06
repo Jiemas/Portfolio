@@ -1,0 +1,217 @@
+Example Experience
+{
+  "BasicInformation": {
+    "Location": "",
+    "RelatedOrganization": "",
+    "TimeWorked": [
+      "",
+      ""
+    ],
+    "WorkType": ""
+  },
+  "Description": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ],
+  "ExperienceName": "",
+  "ImageUrl": "",
+  "ImageAlt": "",
+  "Key": "",
+  "RelatedWork": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ],
+  "SkillsUsed": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ]
+}
+
+SkillExample
+{
+  "ImageUrl": "",
+  "ImageAlt": "",
+  "Key": "",
+  "SkillExperiences": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ],
+  "SkillName": "",
+  "SkillProjects": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ],
+  "Subtitle": ""
+}
+
+ProjectExample
+{
+  "Key": "",
+  "Name": "",
+  "Overview": {
+    "Role": "",
+    "TimeWorked": ["0", "0"],
+    "RelatedWork": {
+      "Link": "",
+      "Text": ""
+    },
+    "SourceCode": {
+      "Link": "",
+      "Text": ""
+    },
+    "DeployLink": {
+      "Link": "",
+      "Text": ""
+    },
+    "RelatedOrganization": ""
+  },
+  "SkillsUsed": [
+    {
+      "Link": "",
+      "Text": ""
+    }
+  ],
+  "Description": "",
+  "EmbedElement": "",
+  "EmbedElementAlt": "",
+  "BulletPoints": ["", ""],
+  "ImageUrl": "",
+  "ImageAlt": "",
+}
+
+KeyExample
+{
+  "ExperienceKeys": [
+    {
+      "Key": "",
+      "RelatedWorkKeys": [
+        0
+      ],
+      "SkillsUsedKeys": [
+        0
+      ]
+    }
+  ],
+  "ProjectKeys": [
+    {
+      "Key": "",
+      "BulletPointKeys": [
+        0
+      ],
+      "SkillsUsedKeys": [
+        0
+      ]
+    }
+  ],
+  "SkillKeys": [
+    ""
+  ]
+}
+
+
+
+
+
+
+Workspace
+
+
+[
+    {
+      "Key": "pcvd",
+      "BulletPointKeys": [
+        0, 1, 2
+      ],
+      "SkillsUsedKeys": [
+        0, 4, 5, 6
+      ]
+    },
+    {
+      "Key": "pdiligent",
+      "BulletPointKeys": [
+        0, 2, 4
+      ],
+      "SkillsUsedKeys": [
+        0, 1
+      ]
+    }
+  ]
+
+
+
+{
+  "Name": "Diligent",
+  "Key": "pdiligent",
+  "Overview": {
+    "Role": "Solo Developer",
+    "TimeWorked": ["July 2024", "July 2024"],
+    "RelatedWork": {
+      "Link": "e186",
+      "Text": "Full Stack Development Course"
+    },
+    "SourceCode": {
+      "Link": "https://gitfront.io/r/jsrubio/rjJtQomFDaxt/Projects/tree/Academic/Full_Stack_Web_Development/",
+      "Text": "Source Code"
+    },
+    "DeployLink": {
+      "Link": "https://youtu.be/CdsnLjWIWk0",
+      "Text": "Video Demo"
+    }
+  },
+  "SkillsUsed": [
+    {
+      "Link": "sj",
+      "Text": "JavaScript"
+    },
+    {
+      "Link": "stdd",
+      "Text": "Test-Driven Development"
+    },
+    {
+      "Link": "snode",
+      "Text": "Node"
+    },
+    {
+      "Link": "spo",
+      "Text": "PostgreSQL"
+    },
+    {
+      "Link": "sr",
+      "Text": "React"
+    },
+    {
+      "Link": "sexpress",
+      "Text": "Express"
+    },
+    {
+      "Link": "shtml",
+      "Text": "HTML"
+    },
+    {
+      "Link": "scss",
+      "Text": "CSS"
+    }
+  ],
+  "Description": "Diligent is a Slack style messaging system and a single page, full stack web application using the NERP stack: Node.js, Express, React, and PostgreSQL, plus Material-UI. I developed this application over the course of eight days as the final cumulative project of the full stack web development class",
+  "EmbedElement": "https://i.imgur.com/9VHaqW2.png",
+  "EmbedElementAlt": "Two chat message pages of Diligent",
+  "BulletPoints": [
+    "Features include workspaces, channels, messaging, role-based access, and persistent user sessions", 
+    "Implemented a RESTful API server with Node.js/Express and designed a PostgreSQL relational database to manage users, workspaces, channels, messages, permissions, and session persistence",
+    "Built a fully interactive React.js frontend featuring authentication, workspace/channel navigation, day-grouped messages, real-time UI updates, responsive layouts, persistent last-visited state, and accessibility-conscious interface patterns.",
+    "Added workspace administration features—including workspace creation, channel creation, and teammate management—secured by ownership and permission logic enforced on both client and server.",
+    "Achieved over 95% code coverage through comprehensive unit, integration, and end-to-end tests across the frontend and backend, ensuring robustness, correctness, and reliable error handling."
+  ],
+  "ImageUrl": "https://upload.wikimedia.org/wikipedia/en/d/dd/Banana_slugs_logo.png",
+  "ImageAlt": "UC Santa Cruz Athletics Logo, also used for the logo of Diligent"
+}

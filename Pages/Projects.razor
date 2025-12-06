@@ -15,11 +15,13 @@
       />
     </MudGrid>
     <MudCollapse Expanded="@ExpandedStates.ProjectExpanded" aria-hidden="@(ExpandedStates.ProjectExpanded ? "false" : "true")">
-      @for (int i = 0; i < keys.Count; i++)
-      {
-        int savedI = i;
-        <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]"/> 
-      }
+      <div class="mx-2">
+        @for (int i = 1; i < keys.Count; i++)
+          {
+            int savedI = i;
+            <SingleProject projectData="@projectDict[keys[savedI].Key]" key="@keys[savedI]" Disabled="@(!ExpandedStates.ProjectExpanded)"/> 
+          }
+      </div>
     </MudCollapse>
     <MudGrid Justify="Justify.Center" Class="pt-10 pb-5" style="@(!ExpandedStates.ProjectExpanded ? "display: none" : "display: flex")">
       <MudToggleIconButton
