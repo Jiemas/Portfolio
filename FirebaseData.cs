@@ -62,11 +62,7 @@ public class ExperienceKey
 {
   public required string Key { get; set; }
   public required List<int> RelatedWorkKeys { get; set; }
-  public required List<int> SkillsUsedKeys { get; set; }
-
-  public required int ImageSize { get; set; }
-  
-  public required bool LargeContent { get; set; }
+  public required List<int> SkillsUsedKeys { get; set; }  
 }
 
 

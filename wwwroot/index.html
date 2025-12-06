@@ -45,7 +45,7 @@
                 el.setAttribute("tabindex", "-1"); 
             } 
             el.focus(); 
-            setTimeout(() => el.scrollIntoView(), 250);
+            setTimeout(() => el.scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"}), 250);
         };
     </script>
 

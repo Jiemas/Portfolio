@@ -113,9 +113,7 @@ code {
     text-align: start;
 }
 
-/* Applies to all buttons and links */
-button:focus-visible,
-a:focus-visible {
+*:focus {
     outline: 3px solid #7DDF64 !important;
     outline-offset: 3px !important;
     border-radius: 4px; /* optional but looks nicer */

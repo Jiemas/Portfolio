@@ -12,12 +12,12 @@ public class ExpandedStates
 
   public void HandleAnchorClick(string data)
   {
-    if (data[0] == 's' && skillKeys is not null && !skillKeys.GetRange(0, 3).Contains(data))
+    if (data[0] == 's' && skillKeys is not null && skillKeys.Count > 3 && !skillKeys.GetRange(0, 3).Contains(data))
     {
       Console.WriteLine($"{data} not found within first three skills");
       SkillExpanded = true;
       SkillChange?.Invoke();
-    } else if (data[0] == 'e' && experienceKeys is not null && experienceKeys[0].Key != data && experienceKeys[1].Key != data)
+    } else if (data[0] == 'e' && experienceKeys is not null && experienceKeys.Count > 2 && experienceKeys[0].Key != data && experienceKeys[1].Key != data)
     {
       ExperienceExpanded = true;
       ExperienceChange?.Invoke();

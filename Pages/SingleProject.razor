@@ -1,100 +1,102 @@
 @inject NavigationManager NavManager
 
-<MudDivider DividerType="DividerType.Middle"/>
-<MudText Typo="Typo.h3" Color="Color.Primary" Class="py-3">@projectData.Name</MudText>
-<MudGrid>
-  <MudItem xs="12" md="8">
-    <MudImage Src="@projectData.EmbedElement"
-      Class="rounded-lg mr-4 mb-2" 
-      ObjectFit="ObjectFit.Contain"
-      Fluid="true"
-      Alt="@projectData.EmbedElementAlt"
-    />
-    
-  </MudItem>
-  <MudItem xs="12" md="4">
-    <MudText Typo="Typo.h4">Overview</MudText>
-    <MudStack Spacing="0" Class="pl-2">
-      <MudText Typo="Typo.subtitle1">
-        @("• " + projectData.Overview.Role + " | " + projectData.Overview.TimeWorked[0] + " - " + projectData.Overview.TimeWorked[1])
-      </MudText>
-      <MudText Typo="Typo.subtitle1">@("• " + projectData.Overview.RelatedOrganization)</MudText>
-      <MudStack Row="true" Spacing="1">
-        <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-        <AnchorLink Typo="Typo.subtitle1" Href="@projectData.Overview.RelatedWork.Link"Color="Color.Primary" Disabled="@Disabled">
-          @(projectData.Overview.RelatedWork.Text)
-        </AnchorLink>
-      </MudStack>
-      <MudStack Row="true" Spacing="1">
-        <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
-          @(projectData.Overview.SourceCode.Text)
-        </MudLink>
-        <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
-        <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary" Disabled="@Disabled">
-          @(projectData.Overview.DeployLink.Text)
-        </MudLink>
-      </MudStack>
-    </MudStack>
-
-    <MudDivider/>
-
-    <MudText Typo="Typo.h4">Skills Used</MudText>
-      @foreach (int i in key.SkillsUsedKeys)
-      {
-        HyperLink item = projectData.SkillsUsed[i];
-        <MudStack Row="true" Class="pl-2" Spacing="1">
-          <MudText Typo="Typo.subtitle1">•</MudText>
-          <AnchorLink Href="@item.Link" Typo="Typo.subtitle1" Color="Color.Primary" Disabled="@Disabled">
-            @item.Text
-          </AnchorLink>
-        </MudStack>
-      }
-    <MudDivider/>
-
-    <MudText Typo="Typo.h4">Description</MudText>
-    
-    <div style="display: flex;">
-      <MudText Typo="Typo.subtitle1" Class="pl-2">@projectData.Description</MudText>
-      <MudToggleIconButton
-        @bind-Toggled="_expanded"
-        Icon="@Icons.Material.Filled.OpenInFull"
-        ToggledIcon="@Icons.Material.Filled.CloseFullscreen"
-        Style="float: right;"
-        aria-label="Show more details on project"
-      />
-    </div>
-  </MudItem>
-</MudGrid>
-
-<MudCollapse Expanded="_expanded">
-<MudCard Style="width: 98%; background-color: #EEF0F2;" Elevation="5" Class="mx-1 mt-5 mb-3">  
-  <MudGrid Class="pa-3">
+<div id="@projectData.Key" Class="pb-5">
+  <MudDivider DividerType="DividerType.Middle"/>
+  <MudText Typo="Typo.h3" Color="Color.Primary" Class="py-3">@projectData.Name</MudText>
+  <MudGrid>
     <MudItem xs="12" md="8">
-    <MudStack Justify="Justify.SpaceEvenly">
-
-      @foreach (int i in key.BulletPointKeys)
-      {
-        <MudStack Row="true" Class="pl-2" Spacing="1">
-          <MudText Typo="Typo.subtitle1">•</MudText>
-          <MudText Typo="Typo.body1">@projectData.BulletPoints[i]</MudText>
-        </MudStack>
-      }
-    </MudStack> 
+      <MudImage Src="@projectData.EmbedElement"
+        Class="rounded-lg mr-4 mb-2" 
+        ObjectFit="ObjectFit.Contain"
+        Fluid="true"
+        Alt="@projectData.EmbedElementAlt"
+      />
+      
     </MudItem>
     <MudItem xs="12" md="4">
-      <MudImage 
-        Src="@projectData.ImageUrl"
-        ObjectFit="ObjectFit.Contain" 
-        Class="rounded-lg pa-4" 
-        Fluid="true"
-        Alt=@(projectData.ImageAlt == "na" ? "" : projectData.ImageAlt)
-      />
+      <MudText Typo="Typo.h4">Overview</MudText>
+      <MudStack Spacing="0" Class="pl-2">
+        <MudText Typo="Typo.subtitle1">
+          @("• " + projectData.Overview.Role + " | " + projectData.Overview.TimeWorked[0] + " - " + projectData.Overview.TimeWorked[1])
+        </MudText>
+        <MudText Typo="Typo.subtitle1">@("• " + projectData.Overview.RelatedOrganization)</MudText>
+        <MudStack Row="true" Spacing="1">
+          <MudText Typo="Typo.subtitle1">@("• ")</MudText>
+          <AnchorLink Typo="Typo.subtitle1" Href="@projectData.Overview.RelatedWork.Link"Color="Color.Primary" Disabled="@Disabled">
+            @(projectData.Overview.RelatedWork.Text)
+          </AnchorLink>
+        </MudStack>
+        <MudStack Row="true" Spacing="1">
+          <MudText Typo="Typo.subtitle1">@("• ")</MudText>
+          <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
+            @(projectData.Overview.SourceCode.Text)
+          </MudLink>
+          <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
+          <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary" Disabled="@Disabled">
+            @(projectData.Overview.DeployLink.Text)
+          </MudLink>
+        </MudStack>
+      </MudStack>
+
+      <MudDivider/>
+
+      <MudText Typo="Typo.h4">Skills Used</MudText>
+        @foreach (int i in key.SkillsUsedKeys)
+        {
+          HyperLink item = projectData.SkillsUsed[i];
+          <MudStack Row="true" Class="pl-2" Spacing="1">
+            <MudText Typo="Typo.subtitle1">•</MudText>
+            <AnchorLink Href="@item.Link" Typo="Typo.subtitle1" Color="Color.Primary" Disabled="@Disabled">
+              @item.Text
+            </AnchorLink>
+          </MudStack>
+        }
+      <MudDivider/>
+
+      <MudText Typo="Typo.h4">Description</MudText>
+      
+      <div style="display: flex;">
+        <MudText Typo="Typo.subtitle1" Class="pl-2">@projectData.Description</MudText>
+        <MudToggleIconButton
+          @bind-Toggled="_expanded"
+          Icon="@Icons.Material.Filled.OpenInFull"
+          ToggledIcon="@Icons.Material.Filled.CloseFullscreen"
+          Style="float: right;"
+          aria-label="Show more details on project"
+        />
+      </div>
     </MudItem>
   </MudGrid>
-</MudCard>
-</MudCollapse>
-<MudDivider DividerType="DividerType.Middle"/>
+
+  <MudCollapse Expanded="_expanded">
+  <MudCard Style="width: 98%; background-color: #EEF0F2;" Elevation="5" Class="mx-1 mt-5 mb-3">  
+    <MudGrid Class="pa-3">
+      <MudItem xs="12" md="8">
+      <MudStack Justify="Justify.SpaceEvenly">
+
+        @foreach (int i in key.BulletPointKeys)
+        {
+          <MudStack Row="true" Class="pl-2" Spacing="1">
+            <MudText Typo="Typo.subtitle1">•</MudText>
+            <MudText Typo="Typo.body1">@projectData.BulletPoints[i]</MudText>
+          </MudStack>
+        }
+      </MudStack> 
+      </MudItem>
+      <MudItem xs="12" md="4">
+        <MudImage 
+          Src="@projectData.ImageUrl"
+          ObjectFit="ObjectFit.Contain" 
+          Class="rounded-lg pa-4" 
+          Fluid="true"
+          Alt=@(projectData.ImageAlt == "na" ? "" : projectData.ImageAlt)
+        />
+      </MudItem>
+    </MudGrid>
+  </MudCard>
+  </MudCollapse>
+  <MudDivider DividerType="DividerType.Middle" Class="px-5"/>
+</div>
 
 @code {
   public bool _expanded { get; set; }

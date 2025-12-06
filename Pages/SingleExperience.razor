@@ -3,7 +3,7 @@
 <MudCard Elevation="5" id="@experienceData.Key" Class="pb-2 responsive_card">  
   <div class="pa-4">
     <MudText Color=Color.Primary Typo="Typo.h3">@experienceData.ExperienceName</MudText>
-    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 2vw;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; column-gap: 2vw;">
       <MudText Typo="Typo.subtitle2">
         @(experienceData.BasicInformation.RelatedOrganization + " · " + experienceData.BasicInformation.WorkType)
       </MudText>
