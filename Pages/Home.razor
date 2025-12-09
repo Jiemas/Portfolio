@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Text.Json
 @inject DatabaseService DbService
 @inject ExpandedStates ExpandedStates
 
@@ -9,8 +10,6 @@
 <HeroImage />
 
 <MudPaper Elevation="0" Class="mt-5"/>
-
-<AboutMe />
 
 <MudPaper Elevation="0" Class="mt-3"/>
 
@@ -25,6 +24,7 @@
 }
 else
 {
+    <AboutMe paragraphs="@Fbdata.AboutMe[aboutMeKey]"/>
     <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys"/>
 
     <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys"/>
@@ -48,15 +48,30 @@ else
     public List<string>? skillKeys;
     public List<ExperienceKey>? experienceKeys;
     public List<ProjectKey>? projectKeys;
+    public string? aboutMeKey;
 
     private FirebaseData? Fbdata;
 
     protected override async Task OnInitializedAsync()
     {
         Fbdata = await DbService.GetAllDataAsync<FirebaseData>();
-        Console.WriteLine(order);
-        if (order is not null && Fbdata is not null)
+        if (order is null)
         {
+            order = "default";
+        }
+        @* Console.WriteLine(order); *@
+        if (Fbdata is null)
+        {
+            Fbdata = await DbService.GetAllLocalDataAsync<FirebaseData>();
+        }
+        if (!Fbdata.Keys.ContainsKey(order))
+        {
+            order = "default";
+        }
+
+        if (Fbdata is not null)
+        {
+            aboutMeKey = Fbdata.Keys[order].AboutMeKey;
             skillKeys = Fbdata.Keys[order].SkillKeys;
             ExpandedStates.skillKeys = skillKeys;
             experienceKeys = Fbdata.Keys[order].ExperienceKeys;

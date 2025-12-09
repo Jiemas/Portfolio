@@ -5,6 +5,7 @@ public class FirebaseData
   public required Dictionary<string, Key> Keys { get; set; }
 
   public required Dictionary<string, Project> Projects { get; set; }
+  public required Dictionary<string, string[]> AboutMe { get; set; }
 }
 
 public class Skill 
@@ -48,6 +49,7 @@ public class Key
   public required List<string> SkillKeys { get; set; }
   public required List<ExperienceKey> ExperienceKeys { get; set; }
   public required List<ProjectKey> ProjectKeys { get; set; }
+  public required string AboutMeKey { get; set; }
 }
 
 public class Information

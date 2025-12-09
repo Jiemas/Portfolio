@@ -150,22 +150,23 @@ Workspace
 
 
 {
-  "Name": "Diligent",
-  "Key": "pdiligent",
+  "Name": "Rapid Review",
+  "Key": "prr",
   "Overview": {
-    "Role": "Solo Developer",
-    "TimeWorked": ["July 2024", "July 2024"],
+    "RelatedOrganization": "Academic Project for UC Santa Cruz Course",
+    "Role": "Lead Backend Developer and Product Owner",
+    "TimeWorked": ["September 2024", "December 2024"],
     "RelatedWork": {
-      "Link": "e186",
-      "Text": "Full Stack Development Course"
+      "Link": "e115a",
+      "Text": "Intro Software Engineering Course"
     },
     "SourceCode": {
-      "Link": "https://gitfront.io/r/jsrubio/rjJtQomFDaxt/Projects/tree/Academic/Full_Stack_Web_Development/",
+      "Link": "https://gitfront.io/r/jsrubio/rjJtQomFDaxt/Projects/tree/Academic/Intro_to_Software_Engineering/",
       "Text": "Source Code"
     },
     "DeployLink": {
-      "Link": "https://youtu.be/CdsnLjWIWk0",
-      "Text": "Video Demo"
+      "Link": "https://rrfrontend-one.vercel.app/",
+      "Text": "Website Link"
     }
   },
   "SkillsUsed": [
@@ -182,8 +183,8 @@ Workspace
       "Text": "Node"
     },
     {
-      "Link": "spo",
-      "Text": "PostgreSQL"
+      "Link": "sfirebase",
+      "Text": "Firebase"
     },
     {
       "Link": "sr",
@@ -200,18 +201,42 @@ Workspace
     {
       "Link": "scss",
       "Text": "CSS"
+    },
+    {
+      "Link": "stypescript",
+      "Text": "TypeScript"
+    },
+    {
+      "Link": "svscode",
+      "Text": "VSCode"
+    },
+    {
+      "Link": "sgit",
+      "Text": "Git"
+    },
+    {
+      "Link": "ssolid",
+      "Text": "SOLID"
     }
   ],
-  "Description": "Diligent is a Slack style messaging system and a single page, full stack web application using the NERP stack: Node.js, Express, React, and PostgreSQL, plus Material-UI. I developed this application over the course of eight days as the final cumulative project of the full stack web development class",
-  "EmbedElement": "https://i.imgur.com/9VHaqW2.png",
-  "EmbedElementAlt": "Two chat message pages of Diligent",
+  "Description": "Rapid Review is a full-stack study platform that lets users create flashcards and generate AI-powered practice tests through a clean React/MUI interface. I built the Express backend with validated RESTful APIs, designed a scalable Firebase database, and engineered a Redis/Bull queue for reliable Llama-powered test generation. The project was developed by a five-person team using Scrum and Git to ensure quality and timely delivery.",
+  "EmbedElement": "https://i.imgur.com/2mf9tPJ.png",
+  "EmbedElementAlt": "Example of Home page in Rapid Review",
   "BulletPoints": [
-    "Features include workspaces, channels, messaging, role-based access, and persistent user sessions", 
-    "Implemented a RESTful API server with Node.js/Express and designed a PostgreSQL relational database to manage users, workspaces, channels, messages, permissions, and session persistence",
-    "Built a fully interactive React.js frontend featuring authentication, workspace/channel navigation, day-grouped messages, real-time UI updates, responsive layouts, persistent last-visited state, and accessibility-conscious interface patterns.",
-    "Added workspace administration features—including workspace creation, channel creation, and teammate management—secured by ownership and permission logic enforced on both client and server.",
-    "Achieved over 95% code coverage through comprehensive unit, integration, and end-to-end tests across the frontend and backend, ensuring robustness, correctness, and reliable error handling."
+    "Created a full-stack web application enabling users to create flashcards and generate practice tests for efficient studying and self-assessment, running frontend on Vercel, backend on Render, and data storage on Firebase", 
+    "Created a full-stack web application enabling users to create flashcards and generate practice tests for efficient studying and self-assessment, using React framework and MUI components",
+    "Built components for a React.js front-end enabling users to create flashcards and generate practice tests for efficient studying and self-assessment in a sleek and minimalistic user interface",
+    "Architected backend framework, designed Firebase database structure, and integrated AI-powered answer generation to enhance test creation",
+    "Developed and maintained backend test suite to ensure code reliability and robust functionality.",
+    "Developed an Express server with RESTful API endpoints that are validated using OpenAPI and tested through SwaggerUI and Suptertest/Jest test suites, ensuring reliability and seamless frontend-backend communication via JSON",
+    "Developed an ExpressJS server with RESTful API endpoints that are validated using OpenAPI and tested through SwaggerUI and Supertest/Jest test suites, ensuring reliability and seamless frontend-backend communication",
+    "Employed Scrum methodologies and git version control throughout development, ensuring both project deadlines and code quality were maintained",
+    "Employed Scrum methods and git version control throughout development, ensuring the five-person team maintained project deadlines and high code quality",
+    "Designed and implemented a structured Firebase Realtime Database schema to efficiently store user-generated flashcards and study sets, ensuring scalability and fast read/write operations",
+    "Designed the structure of the Firebase Realtime Database and implemented API interactions to support efficient, scalable data storage for user-generated content",
+    "Engineered a rate-limited AI request queue using Redis and Bull to manage high volumes of test generation requests, preventing API overload while still integrating Llama for dynamic question and answer creation",
+    "Integrated Llama 3.2 into test generation for dynamic and relevant question and answer creation using OpenAI"
   ],
-  "ImageUrl": "https://upload.wikimedia.org/wikipedia/en/d/dd/Banana_slugs_logo.png",
-  "ImageAlt": "UC Santa Cruz Athletics Logo, also used for the logo of Diligent"
+  "ImageUrl": "https://i.imgur.com/7jXEh8p.png",
+  "ImageAlt": "Example of Quiz page in Rapid Review"
 }
