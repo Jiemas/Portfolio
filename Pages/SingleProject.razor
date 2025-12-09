@@ -20,12 +20,15 @@
           @("• " + projectData.Overview.Role + " | " + projectData.Overview.TimeWorked[0] + " - " + projectData.Overview.TimeWorked[1])
         </MudText>
         <MudText Typo="Typo.subtitle1">@("• " + projectData.Overview.RelatedOrganization)</MudText>
-        <MudStack Row="true" Spacing="1">
-          <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-          <AnchorLink Typo="Typo.subtitle1" Href="@projectData.Overview.RelatedWork.Link"Color="Color.Primary" Disabled="@Disabled">
-            @(projectData.Overview.RelatedWork.Text)
-          </AnchorLink>
-        </MudStack>
+        @if (projectData.Overview.RelatedWork.Link != "na")
+        {
+          <MudStack Row="true" Spacing="1">
+            <MudText Typo="Typo.subtitle1">@("• ")</MudText>
+            <AnchorLink Typo="Typo.subtitle1" Href="@projectData.Overview.RelatedWork.Link"Color="Color.Primary" Disabled="@Disabled">
+              @(projectData.Overview.RelatedWork.Text)
+            </AnchorLink>
+          </MudStack>
+        }
         <MudStack Row="true" Spacing="1">
           <MudText Typo="Typo.subtitle1">@("• ")</MudText>
           <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
