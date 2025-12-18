@@ -1,7 +1,7 @@
 @inject ExpandedStates ExpandedStates
 
-<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" Style="background-color: #EEF0F2;" id="Projects">
-  <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10 pb-4">Projects</MudText>
+<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0" Style="background-color: #EEF0F2;">
+  <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10 pb-4" id="Projects">Projects</MudText>
   <SingleProject projectData="@projectDict[keys[0].Key]" key="@keys[0]"/>
 
   @if (keys.Count > 1)
