@@ -10,6 +10,7 @@
         ObjectFit="ObjectFit.Contain"
         Fluid="true"
         Alt="@projectData.EmbedElementAlt"
+        style="max-height: 75vh;"
       />
       
     </MudItem>
@@ -31,10 +32,13 @@
         }
         <MudStack Row="true" Spacing="1">
           <MudText Typo="Typo.subtitle1">@("• ")</MudText>
-          <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
-            @(projectData.Overview.SourceCode.Text)
-          </MudLink>
-          <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
+          @if (projectData.Overview.SourceCode.Link != "na")
+          {
+            <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.SourceCode.Link)" Color="Color.Primary" Disabled="@Disabled">
+              @(projectData.Overview.SourceCode.Text)
+            </MudLink>
+            <MudText Typo="Typo.subtitle1">@(" | ")</MudText>
+          }
           <MudLink Typo="Typo.subtitle1" Href="@(projectData.Overview.DeployLink.Link)" Color="Color.Primary" Disabled="@Disabled">
             @(projectData.Overview.DeployLink.Text)
           </MudLink>
