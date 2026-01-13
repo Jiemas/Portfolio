@@ -2,7 +2,7 @@ import requests
 import json
 from datetime import datetime
 
-FIREBASE_URL = "https://portfolio-a3134-default-rtdb.firebaseio.com/.json"
+FIREBASE_URL = "https://portfolio-a3134-default-rtdb.firebaseio.com"
 
 def sort_by_time(data):
     # Helper: convert "June 2024" → datetime object
@@ -32,7 +32,7 @@ def sort_by_time(data):
 find_index = lambda l, target: next((i for i, d in enumerate(l) if d.get("Link") == target), -1)
 
 def build_keys_from_skills(skill_key_list):
-    resp = requests.get(FIREBASE_URL)
+    resp = requests.get(f"{FIREBASE_URL}/.json")
     resp.raise_for_status()
     data = resp.json()
 
@@ -68,8 +68,11 @@ def build_keys_from_skills(skill_key_list):
             experience_skills_used = experience.get("SkillsUsed", [])
             experience_skill_index = find_index(experience_skills_used, skill_key)
             if (experience_skill_index < 0):
-                print(f"{skill_key}: Warning: skill not found in {link}'s SkillsUsed list")
-                continue
+                print(f"{skill_key}: Warning: skill not found in {link}'s SkillsUsed list. Adding to list")
+                data = {len(experience_skills_used): {"Link": skill_key, "Text": skill["SkillName"]}}
+                requests.patch(f"{FIREBASE_URL}/Experiences/{link}/SkillsUsed.json", json=data)
+                experience_skill_index = len(experience_skills_used)
+                experience_skills_used.append({"Link": skill_key, "Text": skill["SkillName"]})
             
             if link not in experiences_dict:
                 experiences_dict[link] = {
@@ -94,8 +97,11 @@ def build_keys_from_skills(skill_key_list):
             project_skill_index = find_index(project_skills_used, skill_key)
             
             if (project_skill_index < 0):
-                print(f"{skill_key}: Warning: skill not found in {link}'s SkillsUsed list")
-                continue
+                print(f"{skill_key}: Warning: skill not found in {link}'s SkillsUsed list. Adding to list")
+                data = {len(project_skills_used): {"Link": skill_key, "Text": skill["SkillName"]}}
+                requests.patch(f"{FIREBASE_URL}/Projects/{link}/SkillsUsed.json", json=data)
+                project_skill_index = len(project_skills_used)
+                project_skills_used.append({"Link": skill_key, "Text": skill["SkillName"]})
 
             if link not in projects_dict:
                 projects_dict[link] = {
@@ -118,7 +124,9 @@ def save_json_to_file(data, filename="generated_keys.json"):
 
 if __name__ == "__main__":
     # example usage
-    my_skills = ["scsharp", "sj", "spo", "sblazor", "smui", "steamwork"]  # these should match your Skills keys (not skill-names)
+    # Node.js, JavaScript, Python, PostgreSQL, Linode, Docker, RESTFul APIs, Redis, Git, 
+
+    my_skills = ["swebapp", "scommunication", "sj", "sr", "shtml", "scss", "sjson", "srest", "sgit", "steamwork", "scsharp", "sp", "sllm", "sarcgis", "swcag", "ss"]  # these should match your Skills keys (not skill-names)
     keys = build_keys_from_skills(my_skills)
     save_json_to_file(keys)
     # print(json.dumps(keys, indent=2))
