@@ -54,7 +54,14 @@
         {
           <MudStack Row="true" Class="pl-3">
             <MudText Typo="Typo.body1">• </MudText>
-            <MudText Typo="Typo.body1">@(sentence.Text)</MudText>
+            @if(sentence.Link == "na")
+            {
+              <MudText Typo="Typo.body1">@(sentence.Text)</MudText>
+            }
+            @if(sentence.Link != "na")
+            {
+              <MudLink  Typo="Typo.body1" Href=@sentence.Link>@sentence.Text</MudLink>
+            }
           </MudStack>
         }
     </div>
