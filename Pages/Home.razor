@@ -3,40 +3,47 @@
 @inject DatabaseService DbService
 @inject ExpandedStates ExpandedStates
 
+@* Aria landmarks? 
+Auto ordering experiences and projects based on time? Or write a program to retroactively fix all the wrongly ordered stuff? *@
+
 <AnchorLink Typo="Typo.h5" Color="Color.Primary" Href="start" Class="skip-link">Skip to main content</AnchorLink>
 
 <Header Links="headers"/>
 
-<HeroImage />
+<div role="main">
+    <HeroImage />
 
-<MudPaper Elevation="0" Class="mt-5"/>
+    <MudPaper Elevation="0" Class="mt-8"/>
 
-<MudPaper Elevation="0" Class="mt-3"/>
+    @if (Fbdata is null || order is null)
+    {
+        <MudPaper 
+            Elevation="0" 
+            Style="background-color: #EEF0F2; min-height: 50vh;" 
+            Class="px-md-20 px-sm-10 px-xs-5 pb-5"
+        >
+            <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
+        </MudPaper>
+        <MudPaper 
+            Elevation="0" 
+            Style="min-height: 50vh;" 
+            Class="px-md-20 px-sm-10 px-xs-5 pb-5"
+        >
+            <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Experiences</MudText>
+        </MudPaper>
+    }
+    else
+    {
+        <AboutMe paragraphs="@Fbdata.AboutMe[aboutMeKey]"/>
+        <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys"/>
 
-@if (Fbdata is null || order is null)
-{
-    <MudPaper Elevation="0" Style="background-color: #EEF0F2; min-height: 50vh;" Class="px-md-20 px-sm-10 px-xs-5 pb-5">
-        <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Skills</MudText>
-    </MudPaper>
-    <MudPaper Elevation="0" Style="min-height: 50vh;" Class="px-md-20 px-sm-10 px-xs-5 pb-5">
-        <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10">Experiences</MudText>
-    </MudPaper>
-}
-else
-{
-    <AboutMe paragraphs="@Fbdata.AboutMe[aboutMeKey]"/>
-    <Skills skillsDict="@Fbdata.Skills" keys="@skillKeys"/>
+        <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys"/>
 
-    <Experiences experienceDict="@Fbdata.Experiences" keys="@experienceKeys"/>
-
-    <Projects projectDict="@Fbdata.Projects" keys="@projectKeys"/>
-}
+        <Projects projectDict="@Fbdata.Projects" keys="@projectKeys"/>
+    }
+</div>
 
 <Footer />
-
-@* <MudScrollToTop>
-    <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.ArrowCircleUp" Size="Size.Small"/>
-</MudScrollToTop> *@
 
 @code {
     [Parameter]

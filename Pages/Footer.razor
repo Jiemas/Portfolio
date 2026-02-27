@@ -5,6 +5,7 @@
     Style="background-color: #003c6c;"
     Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0"
     id="Contact"
+    role="contentinfo"
 >
     <MudStack Row="true" Class="py-5">
         <MudImage Src="https://i.imgur.com/0idiu8N.jpeg" 
@@ -14,7 +15,6 @@
             Alt=""
         />
         <div class="flex-grow-1 header_disappear" />
-        @* <div style="display: flex"> *@
         <MudStack>
             <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_disappear" Href="AboutMe">About Me</AnchorLink>
             <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3 header_text_swap_appear" Href="AboutMe">About</AnchorLink>
@@ -41,12 +41,8 @@
                     Color="Color.Secondary" Href="https://www.linkedin.com/in/jiemas-rubio/" aria-label="Jiemas's LinkedIn Account"
                 />
             </div>
-            <MudSpacer/>
-            <div style="display: flex; justify-content: end;">
-                <AnchorLink Typo="Typo.subtitle1" Color="Color.Secondary" Class="ml-3" Href="start">Return to Top</AnchorLink>
-            </div>
+            <AnchorLink Typo="Typo.h5" Color="Color.Secondary" Class="ml-3" Href="start">Return to Top</AnchorLink>
         </MudStack>
-        @* </div> *@
     </MudStack>
 </MudPaper>
 

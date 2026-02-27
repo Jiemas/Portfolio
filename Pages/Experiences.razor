@@ -1,6 +1,11 @@
 @inject ExpandedStates ExpandedStates
 
-<MudPaper Elevation="0" Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0">
+<MudPaper 
+  Elevation="0" 
+  Class="px-md-20 px-sm-10 px-5 py-1 py-sm-0"
+  role="region"
+  aria-labelledby="Experience"
+>
   <MudText Color=Color.Primary Typo="Typo.h2" Class="pt-10" id="Experience">Experience</MudText>
   <MudStack Class="align-center py-4 mx-1" Spacing="10">
 
@@ -24,7 +29,7 @@
           aria-label="Expand experience section"
         />
       </MudGrid>
-      <MudCollapse Expanded="@ExpandedStates.ExperienceExpanded" aria-hidden="@(ExpandedStates.ExperienceExpanded ? "false" : "true")">
+      <MudCollapse Expanded="@ExpandedStates.ExperienceExpanded" tabindex="@(ExpandedStates.ExperienceExpanded ? "0" : "-1")">
         <MudStack Class="align-center py-4 mx-1" Spacing="10">
             @for (int i = 2; i < keys.Count; i++)
             {
